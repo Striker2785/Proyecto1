@@ -1,43 +1,73 @@
 import java.awt.GridLayout;
-import java.awt.BorderLayout;
-
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
+import java.io.DataInputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 
 
 public class Juego{
 
-    private JFrame frame;
+    
 
+    private Juego(){
+        int x = 0;
+        int y = 0;
+        JFrame espera = new JFrame();
+        espera.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        espera.setSize(500,500);
+        espera.setTitle("Espera");
+        espera.pack();
+        espera.setVisible(true);
 
-    public Juego(){
-        
-        Icon icon1 = new ImageIcon("E:\\Back.png");
-        
-
-        frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JFrame frame = new JFrame();
         frame.setSize(500,500);
-        frame.setLayout(new GridLayout(5,1));
-
-        frame.add(new JButton(icon1));
-        frame.add(new JButton("2"));
-        frame.add(new JButton("3"));
-        frame.add(new JButton("4"));
-        frame.add(new JButton("5"));
-
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Memoria");
         frame.pack();
-        frame.setVisible(true);
-        
+        frame.setVisible(false);
 
+        try{
+            //ServerSocket cliente = new ServerSocket(8080);
+            Socket client = new Socket("127.0.0.1", 8080);
+
+            
+            DataInputStream entrada = new DataInputStream(client.getInputStream());
+            String mensaje = entrada.readUTF();
+            System.out.println(mensaje);
+            x = mensaje.charAt(0);
+            y = mensaje.charAt(2);
+                
+            //cliente.close();
+                
+            
+
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+
+        }
         
+        frame.setLayout(new GridLayout(y,x));
+
+
+        int i = 0;
+        int j = 0;
+        
+        while (j < y){
+            while (i < x){
+                Ficha boton = new Ficha(i,j);
+                frame.add(boton.boton);
+                i += 1;
+            }
+            j += 1;
+            i = 0;
+ 
+        }
+
+        frame.setVisible(true);
+        espera.setVisible(false); 
     }
+
+  
     
     public static void  main(String[] args){
 
