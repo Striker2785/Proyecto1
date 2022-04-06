@@ -15,6 +15,9 @@ public class Servidor extends JFrame{
         Marco marco = new Marco();
         marco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+
+
+
     }
 
     
@@ -22,25 +25,11 @@ public class Servidor extends JFrame{
 
 class Marco extends JFrame{
 
+    
+
+
     String mensaje;
     DataOutputStream salida;
-    try{
-
-        Socket server = new Socket("127.0.0.1", 8080);
-        salida = new DataOutputStream(server.getOutputStream());
-        while(true){ 
-
-            salida = new DataOutputStream(server.getOutputStream());
-                
-         }
-                
-
-            
-    } catch (IOException e){
-        e.printStackTrace();
-
-    }
-    
     public Marco(){
 
         setBounds(700,700,700,700);
@@ -50,15 +39,25 @@ class Marco extends JFrame{
         setLocationRelativeTo(null);
         
         JButton boton1 = new JButton("2x3");
-        JButton boton2 = new JButton("4x4");
-        JButton boton3 = new JButton("5x4");
+        JButton boton2 = new JButton("3x4");
+        JButton boton3 = new JButton("4x4");
 
         ActionListener event1 = new ActionListener(){
 
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent q) {
                 mensaje = ("2x3");
-                salida.writeUTF(mensaje);
+                try{
+
+                    Socket server = new Socket("127.0.0.1", 8080);
+                    salida = new DataOutputStream(server.getOutputStream());
+                    salida.writeUTF(mensaje);
+                    setVisible(false);
+                    server.close();
+                        
+                } catch (IOException e){
+                    e.printStackTrace();
+                }
             }
 
         };
@@ -66,9 +65,19 @@ class Marco extends JFrame{
         ActionListener event2 = new ActionListener(){
 
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent q) {
+                mensaje = ("3x4");
+                try{
 
-                mensaje = ("4x4");
+                    Socket server = new Socket("127.0.0.1", 8080);
+                    salida = new DataOutputStream(server.getOutputStream());
+                    salida.writeUTF(mensaje);
+                    setVisible(false);
+                    server.close();
+                        
+                } catch (IOException e){
+                    e.printStackTrace();
+                }
                
   
             }
@@ -78,9 +87,19 @@ class Marco extends JFrame{
         ActionListener event3 = new ActionListener(){
 
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent q) {
+                mensaje = ("4x4");
+                try{
 
-                mensaje = ("5x4");
+                    Socket server = new Socket("127.0.0.1", 8080);
+                    salida = new DataOutputStream(server.getOutputStream());
+                    salida.writeUTF(mensaje);
+                    setVisible(false);
+                    server.close();
+                        
+                } catch (IOException e){
+                    e.printStackTrace();
+                }
                 
             }
 
