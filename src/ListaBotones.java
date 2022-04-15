@@ -30,7 +30,7 @@ public class ListaBotones {
         else{
             Nodo temp = head;
             Nodo nuevo = new Nodo(valor);
-            nuevo.siguiente(temp);
+            nuevo.enlazarSiguiente(temp);
         }
         size++;
     }

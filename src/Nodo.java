@@ -16,7 +16,7 @@ public class Nodo {
 
     }
     
-    public void siguiente(Nodo n){
+    public void enlazarSiguiente(Nodo n){
         
         siguiente = n;
 
