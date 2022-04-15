@@ -26,6 +26,7 @@ public class Ficha {
                     exit.writeUTF(coords);
 
                     envio.close();
+                    
                 } catch (IOException e){
                     e.printStackTrace();
                 }

@@ -10,7 +10,6 @@ import java.io.IOException;
 //import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Random;
 import java.awt.event.*;
 
 public class Servidor extends JFrame{
@@ -25,7 +24,6 @@ public class Servidor extends JFrame{
 class Marco extends JFrame{
 
     static Images imagen = new Images();
-    Random rn = new Random();
     static int x, y, n, a, b, max, min, randomNum, turno;
     static ListaImagenes elegidos = new ListaImagenes();
     int i = 0;
@@ -33,6 +31,8 @@ class Marco extends JFrame{
     int coordx;
     int coordy;
     String cordenadas;
+    int newcoordx, newcoordy;
+    ImageIcon boton;
 
 
     static String mensaje;
@@ -161,21 +161,8 @@ class Marco extends JFrame{
         }
 
 
+        Matriz mat = new Matriz(x,y,elegidos);
         
-        ListaImagenes copy = new ListaImagenes();
-        copy = elegidos;
-        ImageIcon [][] matriz = new ImageIcon[x][y];
-        while (j<y){
-            while (i<x){
-                randomNum = rn.nextInt(copy.getSize()-min);
-                matriz[i][j] = (ImageIcon) copy.obtener(randomNum);
-                copy.eliminar(randomNum);
-                i++;
-            }
-            j++;
-            i = 0;
-        
-        }
 
         try{
             ServerSocket socket = new ServerSocket(9090);
@@ -189,16 +176,25 @@ class Marco extends JFrame{
                 coordx = Character.getNumericValue(coordx);
                 coordy = Character.getNumericValue(coordy);
 
-                
+
                 if (turno == 0){
+                    newcoordx = coordx;
+                    newcoordy = coordy;
+                    turno++;
                     
+                    //boton = new ImageIcon("mat[coordx][coordy]");
+                    //System.out.println("X:"+ coordx+ "Y:"+ coordy);
+                    System.out.println((mat.getMatriz())[coordx][coordy]);
+                    
+                }else{
+                    System.out.println("Hola");
+                    turno = 0;
                 }
             }
 
         } catch (Exception e){
 
         }
-        
         //System.out.println(imagen.getLista().getSize());
     
     }
