@@ -1,21 +1,22 @@
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.*;
 import java.io.DataInputStream;
-//import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-//import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 
 public class Servidor extends JFrame{
    
-    public static void main(String[] args){
+    public static void main(String[] args) throws InterruptedException{
         Marco marco = new Marco();
+        Juego juego = new Juego();
         marco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
@@ -23,28 +24,56 @@ public class Servidor extends JFrame{
 
 class Marco extends JFrame{
 
+    BufferedImage image;
     static Images imagen = new Images();
-    static int x, y, n, a, b, max, min, randomNum, turno;
+    static int x, y, n, a, b, max, min, randomNum, turno, p1, p2;
     static ListaImagenes elegidos = new ListaImagenes();
     int i = 0;
     int j = 0;
     int coordx;
     int coordy;
-    String cordenadas;
+    String cordenadas, des, n1, n2, name;
     int newcoordx, newcoordy;
-    ImageIcon boton;
+    String pos, pos1;
 
 
     static String mensaje;
     DataOutputStream salida;
 
     public Marco(){
-
         setBounds(700,700,700,700);
         JPanel ventana = new JPanel();
         ventana.setLayout(new BorderLayout());
         ventana.setLayout(new GridLayout(1,3));
         setLocationRelativeTo(null);
+        
+        n1 = JOptionPane.showInputDialog("Digite el nombre 1: ");
+        n2 = JOptionPane.showInputDialog("Digite el nombre 2: ");
+        name = n1;
+        JLabel nombre1 = new JLabel(n1);
+        JLabel nombre2 = new JLabel(n2);
+        JLabel pun1 = new JLabel(String.valueOf(p1));
+        JLabel pun2 = new JLabel(String.valueOf(p2));
+
+        nombre1.setBounds(10, 10, 200, 200);
+        nombre2.setBounds(10, 40, 200, 200);
+        pun1.setBounds(70, 10, 200, 200);
+        pun2.setBounds(70, 40, 200, 200);
+
+
+        JFrame puntajes = new JFrame();
+        puntajes.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        puntajes.setLayout(null);
+        puntajes.setSize(new Dimension(200,200));
+        puntajes.setMinimumSize(new Dimension(200, 200));
+        puntajes.setTitle("Puntajes");
+        puntajes.setLocationRelativeTo(null);
+        puntajes.pack();
+        puntajes.setVisible(false);
+        puntajes.add(nombre1);
+        puntajes.add(nombre2);
+        puntajes.add(pun1);
+        puntajes.add(pun2);
         
         JButton boton1 = new JButton("2x3");
         JButton boton2 = new JButton("3x4");
@@ -63,6 +92,7 @@ class Marco extends JFrame{
                     salida = new DataOutputStream(server.getOutputStream());
                     salida.writeUTF(mensaje);
                     setVisible(false);
+                    puntajes.setVisible(true);
                     server.close();
                     x = mensaje.charAt(0);
                     y = mensaje.charAt(2);
@@ -92,15 +122,14 @@ class Marco extends JFrame{
                     Socket server = new Socket("127.0.0.1", 8080);
                     salida = new DataOutputStream(server.getOutputStream());
                     salida.writeUTF(mensaje);
+                    puntajes.setVisible(true);
                     setVisible(false);
                     server.close();
                     x = mensaje.charAt(0);
                     y = mensaje.charAt(2);
-                    n = mensaje.charAt(4);
                     x = Character.getNumericValue(x);   
                     y = Character.getNumericValue(y);  
-                    n = Character.getNumericValue(n);
-
+                    n = x*y;
                     elegidos = imagen.getLista();
                     elegidos.cortar(n);
                         
@@ -123,9 +152,16 @@ class Marco extends JFrame{
                     Socket server = new Socket("127.0.0.1", 8080);
                     salida = new DataOutputStream(server.getOutputStream());
                     salida.writeUTF(mensaje);
-                    elegidos = imagen.getLista();
+                    puntajes.setVisible(true);
                     setVisible(false);
                     server.close();
+                    x = mensaje.charAt(0);
+                    y = mensaje.charAt(2);
+                    x = Character.getNumericValue(x);   
+                    y = Character.getNumericValue(y);  
+                    n = x*y;
+                    elegidos = imagen.getLista();
+                    elegidos.cortar(n);
                         
                 } catch (IOException e){
                     e.printStackTrace();
@@ -166,10 +202,10 @@ class Marco extends JFrame{
 
         try{
             ServerSocket socket = new ServerSocket(9090);
-            
             while (true){
                 Socket main = socket.accept();
                 DataInputStream coords= new DataInputStream(main.getInputStream());
+                DataOutputStream bot = new DataOutputStream(main.getOutputStream());
                 cordenadas = coords.readUTF();
                 coordx = cordenadas.charAt(2);
                 coordy = cordenadas.charAt(5);
@@ -181,13 +217,51 @@ class Marco extends JFrame{
                     newcoordx = coordx;
                     newcoordy = coordy;
                     turno++;
-                    
-                    //boton = new ImageIcon("mat[coordx][coordy]");
-                    //System.out.println("X:"+ coordx+ "Y:"+ coordy);
-                    System.out.println((mat.getMatriz())[coordx][coordy]);
-                    
+
+                    pos = ((mat.getMatriz())[newcoordx][newcoordy]);   
+                    bot.writeUTF(pos);
+                   
+
+
                 }else{
-                    System.out.println("Hola");
+                    pos1 = ((mat.getMatriz())[coordx][coordy]);
+                    bot.writeUTF(pos1);
+                    if (pos1 == pos){
+                        if (name == n1){
+                            p1++;
+                            pun1.setText(String.valueOf(p1));
+
+                        }else{
+                            p2++;
+                            pun2.setText(String.valueOf(p2));
+                        }
+                        des = ("x:"+coordx+"y:"+coordy+"x2:"+newcoordx+"y2:"+newcoordy+"iguales");
+                        try{
+                            Socket desha = new Socket("127.0.0.1", 7070);
+                            DataOutputStream desBot = new DataOutputStream(desha.getOutputStream());
+                            desBot.writeUTF(des);
+                            desha.close();
+                        }catch (IOException e){
+                            e.printStackTrace();
+                        }
+                    }else{
+                        if (name == n1){
+                            name = n2;
+                        }else{
+                            name = n1;
+                        }
+                        des = ("x:"+coordx+"y:"+coordy+"x2:"+newcoordx+"y2:"+newcoordy);
+                        try{
+                            Socket desha2 = new Socket("127.0.0.1", 7070);
+                            DataOutputStream desBot2 = new DataOutputStream(desha2.getOutputStream());
+                            desBot2.writeUTF(des);
+                            desha2.close();
+                        }catch (IOException e){
+                            e.printStackTrace();
+                        }
+
+                        System.out.println("hola");
+                    }
                     turno = 0;
                 }
             }
@@ -195,7 +269,7 @@ class Marco extends JFrame{
         } catch (Exception e){
 
         }
-        //System.out.println(imagen.getLista().getSize());
+        
     
     }
             

@@ -1,15 +1,15 @@
-import javax.swing.ImageIcon;
+
 
 public class Images {
     ListaImagenes imagenes;
-    ImageIcon oso = new ImageIcon("C:/Users/menei/Desktop/Braulio/Trabajos/U2022/Semestre1/Datos1/Proyecto1/Proyecto1/src/Imagenes/Oso.jpeg");
-    ImageIcon burro = new ImageIcon("C:/Users/menei/Desktop/Braulio/Trabajos/U2022/Semestre1/Datos1/Proyecto1/Proyecto1/src/Imagenes/Burro.jpeg");
-    ImageIcon foca = new ImageIcon("C:/Users/menei/Desktop/Braulio/Trabajos/U2022/Semestre1/Datos1/Proyecto1/Proyecto1/src/Imagenes/Foca.jpeg");
-    ImageIcon gato = new ImageIcon("C:/Users/menei/Desktop/Braulio/Trabajos/U2022/Semestre1/Datos1/Proyecto1/Proyecto1/src/Imagenes/Gato.jpeg");
-    ImageIcon leon = new ImageIcon("C:/Users/menei/Desktop/Braulio/Trabajos/U2022/Semestre1/Datos1/Proyecto1/Proyecto1/src/Imagenes/Leon.jpeg");
-    ImageIcon pato = new ImageIcon("C:/Users/menei/Desktop/Braulio/Trabajos/U2022/Semestre1/Datos1/Proyecto1/Proyecto1/src/Imagenes/Pato.jpeg");
-    ImageIcon perico = new ImageIcon("C:/Users/menei/Desktop/Braulio/Trabajos/U2022/Semestre1/Datos1/Proyecto1/Proyecto1/src/Imagenes/Perico.jpeg");
-    ImageIcon rana = new ImageIcon("C:/Users/menei/Desktop/Braulio/Trabajos/U2022/Semestre1/Datos1/Proyecto1/Proyecto1/src/Imagenes/Rana.jpeg");
+    String oso = "C:/Users/menei/Desktop/Braulio/Trabajos/U2022/Semestre1/Datos1/Proyecto1/Proyecto1/src/Imagenes/Oso.jpg";
+    String burro = "C:/Users/menei/Desktop/Braulio/Trabajos/U2022/Semestre1/Datos1/Proyecto1/Proyecto1/src/Imagenes/Burro.jpg";
+    String foca = "C:/Users/menei/Desktop/Braulio/Trabajos/U2022/Semestre1/Datos1/Proyecto1/Proyecto1/src/Imagenes/Foca.jpg";
+    String gato = "C:/Users/menei/Desktop/Braulio/Trabajos/U2022/Semestre1/Datos1/Proyecto1/Proyecto1/src/Imagenes/Gato.jpg";
+    String leon = "C:/Users/menei/Desktop/Braulio/Trabajos/U2022/Semestre1/Datos1/Proyecto1/Proyecto1/src/Imagenes/Leon.jpg";
+    String pato = "C:/Users/menei/Desktop/Braulio/Trabajos/U2022/Semestre1/Datos1/Proyecto1/Proyecto1/src/Imagenes/Pato.jpg";
+    String perico = "C:/Users/menei/Desktop/Braulio/Trabajos/U2022/Semestre1/Datos1/Proyecto1/Proyecto1/src/Imagenes/Perico.jpg";
+    String rana = "C:/Users/menei/Desktop/Braulio/Trabajos/U2022/Semestre1/Datos1/Proyecto1/Proyecto1/src/Imagenes/Rana.jpg";
 
     
     public Images(){

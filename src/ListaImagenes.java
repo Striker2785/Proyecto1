@@ -1,4 +1,5 @@
 
+
 public class ListaImagenes {
     Nodo head;
     int size;
@@ -10,7 +11,7 @@ public class ListaImagenes {
 
     }
 
-    public Object obtener(int i){
+    public String obtener(int i){
         int contador = 0;
         Nodo temp = head;
         while (contador < i){
@@ -22,7 +23,7 @@ public class ListaImagenes {
         return temp.obtenerValor();
     }
 
-    public void addPrimero(Object valor){
+    public void addPrimero(String valor){
 
         if (head == null){
             head = new Nodo(valor);

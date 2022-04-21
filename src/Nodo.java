@@ -1,16 +1,16 @@
 public class Nodo {
 
-    Object valor;
+    String valor;
     Nodo siguiente;
 
-    public Nodo(Object valor){
+    public Nodo(String valor){
 
         this.valor = valor;
         this.siguiente = null;
 
     }
     
-    public Object obtenerValor(){
+    public String obtenerValor(){
 
         return valor;
 
