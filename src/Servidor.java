@@ -16,7 +16,6 @@ public class Servidor extends JFrame{
    
     public static void main(String[] args) throws InterruptedException{
         Marco marco = new Marco();
-        Juego juego = new Juego();
         marco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
@@ -246,8 +245,10 @@ class Marco extends JFrame{
                         }
                     }else{
                         if (name == n1){
+                            JOptionPane.showMessageDialog(null, "Turno de "+n2);
                             name = n2;
                         }else{
+                            JOptionPane.showMessageDialog(null, "Turno de "+n1);
                             name = n1;
                         }
                         des = ("x:"+coordx+"y:"+coordy+"x2:"+newcoordx+"y2:"+newcoordy);
@@ -260,7 +261,6 @@ class Marco extends JFrame{
                             e.printStackTrace();
                         }
 
-                        System.out.println("hola");
                     }
                     turno = 0;
                 }
