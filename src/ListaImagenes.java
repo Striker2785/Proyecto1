@@ -1,8 +1,11 @@
-
+/**
+ * Se crea la clase ListaImagenes
+ */
 
 public class ListaImagenes {
     Nodo head;
     int size;
+
 
     public ListaImagenes(){
 
@@ -10,7 +13,11 @@ public class ListaImagenes {
         size = 0;   
 
     }
-
+    /**
+     * con esto obtenemos el valor en una posicion dada.
+     * @param i
+     * @return
+     */
     public String obtener(int i){
         int contador = 0;
         Nodo temp = head;
@@ -23,6 +30,10 @@ public class ListaImagenes {
         return temp.obtenerValor();
     }
 
+    /**
+     * Con esto agregamos un nuevo valor a la lista
+     * @param valor
+     */
     public void addPrimero(String valor){
 
         if (head == null){
@@ -37,12 +48,14 @@ public class ListaImagenes {
 
             }
             temp.enlazarSiguiente(nuevo); 
-            //NodoImage nuevo = new NodoImage(valor);
-            //nuevo.enlazarSiguiente(temp);
         }
         size++;
     }
 
+    /**
+     * Esto elimina un valor en una posicion dada.
+     * @param i
+     */
     public void eliminar(int i){
 
         if (i==0){
@@ -62,7 +75,10 @@ public class ListaImagenes {
         size--;
 
     }
-
+    /**
+     * Con esto se puede dividir la lista en una posicion dada.
+     * @param i
+     */
     public void cortar(int i){
 
         int contador = 0;
@@ -76,15 +92,19 @@ public class ListaImagenes {
         size = i;
 
     }
-
+    /**
+     * Con esto eliminamos el primer valor de la lista.
+     */
     public void eliminarPrimero(){
         head = head.obtenerSiguiente();
         System.err.println(head);
         size--;
     }
 
-
-
+    /**
+     * Esto nos devuelve el tamaño de la lista.
+     * @return
+     */
     public int getSize(){
 
         return size;

@@ -1,5 +1,7 @@
 
-
+/**
+ *  Se crea la clase Images con sus respectivas variables.
+ */
 public class Images {
     ListaImagenes imagenes;
     String oso = "C:/Users/menei/Desktop/Braulio/Trabajos/U2022/Semestre1/Datos1/Proyecto1/Proyecto1/src/Imagenes/Oso.jpg";
@@ -11,7 +13,9 @@ public class Images {
     String perico = "C:/Users/menei/Desktop/Braulio/Trabajos/U2022/Semestre1/Datos1/Proyecto1/Proyecto1/src/Imagenes/Perico.jpg";
     String rana = "C:/Users/menei/Desktop/Braulio/Trabajos/U2022/Semestre1/Datos1/Proyecto1/Proyecto1/src/Imagenes/Rana.jpg";
 
-    
+    /**
+     * Aquí agregamos todas las imagenes a la lista de imagenes.
+     */
     public Images(){
         imagenes = new ListaImagenes();
         imagenes.addPrimero(oso);
@@ -32,6 +36,10 @@ public class Images {
         imagenes.addPrimero(rana);
 
     }
+    /**
+     * Con esto obtenemos la lista de imagenes.
+     * @return
+     */
     public ListaImagenes getLista(){
         return imagenes;
     }
